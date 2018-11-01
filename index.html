@@ -34,22 +34,22 @@
     </div>
 </div>
 <script>
-    function malm2() {
-        fetch('https://mixer.com/api/v2/levels/patronage/channels/32709/status')
-        .then(res => res.json())
-        .then(status => {
-            const mileStone = status.patronagePeriodId;
-            return fetch('https://mixer.com/api/v2/levels/patronage/resources/' + mileStone);
-        })
-        .then(res => res.json())
-        .then(resources => {
-            return resources.endTime;
-        })
-        .then(end => {
-            document.querySelector('#resetTIme').innerHTML = new Date(end).toLocaleString();
-        });
-    }
-    malm2();
-    setInterval(() => malm2(), 60 * 60 * 1000);
+   (function malm2() {
+     fetch('https://mixer.com/api/v2/levels/patronage/channels/32709/status')
+      .then(res => res.json())
+      .then(status => {
+        const mileStone = status.patronagePeriodId;
+        return fetch('https://mixer.com/api/v2/levels/patronage/resources/' + mileStone);
+      })
+      .then(res => res.json())
+      .then(resources => {
+        return resources.endTime;
+      })
+      .then(end => {
+        document.querySelector('#resetTime').innerHTML = new Date(end).toLocaleString();
+      });
+      setTimeout(() => malm2(), 60 * 60 * 1000);
+   })();
 </script>
 </body>
+</html>
