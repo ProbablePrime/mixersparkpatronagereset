@@ -1,0 +1,54 @@
+<html>
+<head>
+    <style type="text/css"> 
+        .malm {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        img {
+            width: 150px;
+        }
+        body {
+            background-image: url("https://static.mixer.com/img/design/home-backgrounds/x-gradient.jpg");
+        }
+        * {
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 1.2em;
+            
+        }
+    </style>
+</head>
+
+<body>
+<div class="malm" >
+    <img src="https://static.mixer.com/img/design/ui/spark-crystal/001_crystal/001_crystal_filled.png" />
+    <p>Spark Patronage resets at:</p>
+    <div id="resetTime">
+        Loading...
+    </div>
+</div>
+<script>
+    function malm2() {
+        fetch('https://mixer.com/api/v2/levels/patronage/channels/32709/status')
+        .then(res => res.json())
+        .then(status => {
+            const mileStone = status.patronagePeriodId;
+            return fetch('https://mixer.com/api/v2/levels/patronage/resources/' + mileStone);
+        })
+        .then(res => res.json())
+        .then(resources => {
+            return resources.endTime;
+        })
+        .then(end => {
+            document.querySelector('#resetTIme').innerHTML = new Date(end).toLocaleString();
+        });
+    }
+    malm2();
+    setInterval(() => malm2(), 60 * 60 * 1000);
+</script>
+</body>
