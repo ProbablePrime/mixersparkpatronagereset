@@ -1,55 +1,31 @@
 <html>
+
 <head>
-    <style type="text/css"> 
-        .malm {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        img {
-            width: 150px;
-        }
-        body {
-            background-image: url("https://static.mixer.com/img/design/home-backgrounds/x-gradient.jpg");
-            background-size: cover;
-        }
-        * {
-            color: white;
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
-            font-size: 1.2em;
-            
-        }
-    </style>
+    <title>Mixer Patronage Reset</title>
+
+    <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <link rel="apple-touch-icon" sizes="256x256" href="./assets/icon.png">
+    <link rel="icon" sizes="256x256" href="./assets/icon.png" />
+
+    <link rel="stylesheet" href="./assets/index.css" />
 </head>
 
 <body>
-<div class="malm" >
-    <img src="https://static.mixer.com/img/design/ui/spark-crystal/001_crystal/001_crystal_filled.png" />
-    <p>Spark Patronage resets at:</p>
-    <div id="resetTime">
-        Loading...
+    <div class="malm">
+        <img src="https://mixer.com/_latest/assets/images/main/logos/full.svg?d0e34ecac258140ecdf06a43ad89d56cfff3cf55"
+            height=80 />
+        <p>Spark Patronage Reset</p>
+        <div class="crystal">
+            <div class="inner"></div>
+            <div class="timer"></div>
+        </div>
+        <p class="reset">Loading...</p>
     </div>
-</div>
-<script>
-   (function malm2() {
-     fetch('https://mixer.com/api/v2/levels/patronage/channels/32709/status')
-      .then(res => res.json())
-      .then(status => {
-        const mileStone = status.patronagePeriodId;
-        return fetch('https://mixer.com/api/v2/levels/patronage/resources/' + mileStone);
-      })
-      .then(res => res.json())
-      .then(resources => {
-        return resources.endTime;
-      })
-      .then(end => {
-        document.querySelector('#resetTime').innerHTML = new Date(end).toLocaleString();
-      });
-      setTimeout(() => malm2(), 60 * 60 * 1000);
-   })();
-</script>
+
+    <script type="application/javascript" src="./assets/index.js"></script>
 </body>
+
 </html>
