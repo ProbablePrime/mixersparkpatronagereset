@@ -1,0 +1,60 @@
+body {
+    background-image: url(https://static.mixer.com/img/design/home-backgrounds/x-gradient.jpg);
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  body .malm {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  body .malm img {
+    margin: 0 0 -1em 0;
+  }
+  body .malm p {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    font-size: 1.6em;
+    color: #00affb;
+    margin: 1em;
+  }
+  body .malm .crystal {
+    width: 400px;
+    height: 400px;
+    background-image: url("https://static.mixer.com/img/design/ui/spark-crystal/001_crystal/001_crystal_filled.png");
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: auto 400px;
+    position: relative;
+  }
+  body .malm .crystal .inner {
+    height: 100%;
+    width: 100%;
+    background-image: url("https://static.mixer.com/img/design/ui/spark-crystal/001_crystal/001_crystal_filled.png");
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: auto 400px;
+    filter: grayscale(100%);
+  }
+  body .malm .crystal .timer {
+    background: #a5edff;
+    display: none;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 0.75em;
+    position: absolute;
+    top: 100%;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1em;
+    color: #00affb;
+    line-height: 0.75em;
+    padding: 0.25em;
+    border-radius: 0.25em;
+    border: 0.1em solid #00affb;
+  }
+  
