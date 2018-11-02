@@ -13,10 +13,8 @@ new class Malm {
       })
       .then(res => res.json())
       .then(resources => {
-        const s = new Date(resources.startTime);
-        const r = new Date(resources.endTime);
-        this.start = moment(s);
-        this.reset = moment(r);
+        this.start = new Date(resources.startTime);
+        this.reset = new Date(resources.endTime);
 
         this.setTimes();
 
@@ -32,15 +30,62 @@ new class Malm {
     return shiftedAndScaledValue;
   }
 
+  nth(d) {
+    if (d > 3 && d < 21) return "th";
+    switch (d % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  }
+
+  formatDate(date) {
+    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ];
+
+    const dow = date.getDay();
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+    const time = `${
+      date.getHours() > 12
+        ? `${date.getHours() - 12} PM`
+        : `${date.getHours()} AM`
+    }`;
+
+    return `${dayNames[dow]} ${day + this.nth(day)} ${
+      monthNames[monthIndex]
+    } ${year} - ${time}`;
+  }
+
   setTimes() {
-    this.now = moment.tz("America/Los_Angeles");
+    this.now = new Date();
 
     this.diff =
       100 -
       this.linearRemapPct(
-        this.now.valueOf(),
-        this.start.valueOf(),
-        this.reset.valueOf(),
+        this.now.getTime(),
+        this.start.getTime(),
+        this.reset.getTime(),
         0,
         100
       );
@@ -53,11 +98,11 @@ new class Malm {
   }
 
   getTime() {
-    const duration = moment.duration(this.reset.diff(this.now));
-    const days = parseInt(duration.asDays());
-    const hours = parseInt(duration.asHours());
+    const duration = this.reset.getTime() - this.now.getTime();
+    const days = parseInt(duration / 1000 / 60 / 60 / 24);
+    const hours = parseInt(duration / 1000 / 60 / 60);
     const h = hours - days * 24;
-    const minutes = parseInt(duration.asMinutes());
+    const minutes = parseInt(duration / 1000 / 60);
     const m = minutes - hours * 60;
     return `${days > 0 ? `${days}d, ` : ""}${h > 0 ? `${h}h, ` : ""}${
       m > 0 ? `${m}m` : ""
@@ -77,8 +122,8 @@ new class Malm {
       ".crystal .timer"
     ).textContent = `Resets in: ${this.getTime()}`;
 
-    document.querySelector(".malm .reset").textContent = `${this.reset.format(
-      "ddd MMM Do, YYYY - ha"
+    document.querySelector(".malm .reset").textContent = `${this.formatDate(
+      this.reset
     )} PT`;
   }
 }();
