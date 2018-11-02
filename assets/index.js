@@ -104,8 +104,8 @@ new class Malm {
     const h = hours - days * 24;
     const minutes = parseInt(duration / 1000 / 60);
     const m = minutes - hours * 60;
-    return `${days > 0 ? `${days}d, ` : ""}${h > 0 ? `${h}h, ` : ""}${
-      m > 0 ? `${m}m` : ""
+    return `${days > 0 ? `${days}d` : ""}${h > 0 ? `, ${h}h` : ""}${
+      m > 0 ? `, ${m}m` : ""
     }`;
   }
 
