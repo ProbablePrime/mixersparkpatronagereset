@@ -16,13 +16,18 @@ body .malm * {
   font-weight: bolder;
 }
 body .malm img {
-  margin: 0 0 -1em 0;
+  max-width: 280px;
+  width: 80%;
+  margin-bottom: 0.5em;
 }
 body .malm p {
   text-align: center;
   font-size: 1.6em;
   color: #00affb;
-  margin: 1em;
+  margin: 0 0 1em 0;
+}
+body .malm p.reset {
+  margin: 1em 0 0 0;
 }
 body .malm .crystal {
   width: 400px;
