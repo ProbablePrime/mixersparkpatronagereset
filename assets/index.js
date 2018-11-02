@@ -68,8 +68,8 @@ new class Malm {
     const year = date.getFullYear();
     const time = `${
       date.getHours() > 12
-        ? `${date.getHours() - 12} PM`
-        : `${date.getHours()} AM`
+        ? `${date.getHours() - 12}pm`
+        : `${date.getHours()}am`
     }`;
 
     return `${dayNames[dow]} ${day + this.nth(day)} ${
