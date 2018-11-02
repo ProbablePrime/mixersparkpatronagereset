@@ -78,7 +78,7 @@ new class Malm {
     ).textContent = `Resets in: ${this.getTime()}`;
 
     document.querySelector(".malm .reset").textContent = `${this.reset.format(
-      "ddd Do MMM YYYY, ha"
+      "ddd MMM Do, YYYY - ha"
     )} PT`;
   }
 }();
