@@ -92,6 +92,8 @@ new class Malm {
   }
 
   startTimer() {
+    this.update();
+
     this.timer = setInterval(() => {
       this.update();
     }, 1000);
