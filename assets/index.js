@@ -3,6 +3,31 @@ new class Malm {
     this.resetsEvery = 14; // in days
     this.timer = null;
 
+    const resize = new Event("resize");
+    window.addEventListener("resize", e => {
+      // resize crystal to fit display
+      const mixerLogo = document.querySelector(".malm img");
+      const p1 = document.querySelector(".malm p:not(.reset)");
+      const p2 = document.querySelector(".malm p.reset");
+      const newH =
+        window.outerHeight -
+        mixerLogo.scrollHeight -
+        p1.scrollHeight -
+        p2.scrollHeight;
+
+      const crystal = document.querySelector(".malm .crystal");
+      const inner = crystal.querySelector(".inner");
+
+      crystal.style.height = newH > 480 ? 400 : newH;
+      crystal.style.backgroundSize = `auto ${
+        newH > 480 ? 400 : newH - newH / 5
+      }px`;
+      inner.style.backgroundSize = `auto ${
+        newH > 480 ? 400 : newH - newH / 5
+      }px`;
+    });
+    window.dispatchEvent(resize);
+
     fetch("https://mixer.com/api/v2/levels/patronage/channels/32709/status")
       .then(res => res.json())
       .then(status => {
@@ -126,6 +151,6 @@ new class Malm {
 
     document.querySelector(".malm .reset").textContent = `${this.formatDate(
       this.reset
-    )} PT`;
+    )}`;
   }
 }();
